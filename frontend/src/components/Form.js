@@ -18,7 +18,7 @@ function Form(props) {
             {props.article ? (
                 <div className="mb-3">
 
-                    <label htmlForm="title" className="form-label">Title</label>
+                    <label htmlFor="title" className="form-label">Title</label>
                     <input
                         type="text"
                         className="form-control"
@@ -27,7 +27,7 @@ function Form(props) {
                         onChange={(e) => setTitle(e.target.value)}
                     />
 
-                    <label htmlForm="body" className="form-label">Description</label>
+                    <label htmlFor="body" className="form-label">Description</label>
                     <textarea
                         row="5"
                         type="text"
