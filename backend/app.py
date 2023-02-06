@@ -79,6 +79,20 @@ def update_article(id):
     }
 
 
+@app.route('/delete/<int:id>', methods=['DELETE'])
+def delete_article(id):
+    article = Articles.query.get(id)
+    if article is not None:
+        db.session.delete(article)
+        db.session.commit()
+        return {
+            'Status': f'article with id:{id} deleted successfully'
+        }
+    return {
+        'Status': f'article with id:{id} not found'
+    }
+
+
 if __name__ == '__main__':
     # creating database command
     with app.app_context():
