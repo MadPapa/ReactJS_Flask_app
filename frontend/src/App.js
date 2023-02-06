@@ -25,14 +25,25 @@ function App() {
     setEditedArticle(article)
   }
 
+  const updatedData = (article) => {
+    const new_article = articles.map(my_article => {
+      if (my_article.id === article.id)
+        return article
+      return my_article
+    })
+    setArticles(new_article)
+  }
+
   return (
     <div className="App">
       <h1>Flask and React App</h1>
+      <br />
+      <br />
 
       <ArticleList articles={articles} editArticle={editArticle} />
 
-      {editedArticle ? <Form article={editedArticle} /> : null}
-      
+      {editedArticle ? <Form article={editedArticle} updatedData={updatedData} /> : null}
+
     </div>
   );
 }

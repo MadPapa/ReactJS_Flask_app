@@ -8,7 +8,7 @@ function Form(props) {
     const [body, setBody] = useState(props.article.body)
     const updateArticle = () => {
         APIService.UpdateArticle(props.article.id, { title, body })
-            .then(resp => console.log(resp))
+            .then(resp => props.updatedData(resp))
             .catch(error => console.log(error))
     }
 
