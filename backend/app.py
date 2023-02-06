@@ -39,6 +39,7 @@ articles_schema = ArticleSchema(many=True)
 def get_articles():
     articles = Articles.query.all()
     results = articles_schema.dump(articles)
+    
     return jsonify(results)
 
 
@@ -60,6 +61,7 @@ def add_article():
     articles = Articles(title, body)
     db.session.add(articles)
     db.session.commit()
+    
     return article_schema.jsonify(articles)
 
 
@@ -73,6 +75,7 @@ def update_article(id):
         article.title = title
         article.body = body
         db.session.commit()
+
         return article_schema.jsonify(article)
     return {
         'Status': f'article with id:{id} not found'
@@ -85,6 +88,7 @@ def delete_article(id):
     if article is not None:
         db.session.delete(article)
         db.session.commit()
+        
         return {
             'Status': f'article with id:{id} deleted successfully'
         }
