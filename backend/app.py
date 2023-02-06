@@ -2,8 +2,10 @@ from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 from flask_marshmallow import Marshmallow
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost/flask'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -39,7 +41,7 @@ articles_schema = ArticleSchema(many=True)
 def get_articles():
     articles = Articles.query.all()
     results = articles_schema.dump(articles)
-    
+
     return jsonify(results)
 
 
@@ -61,7 +63,7 @@ def add_article():
     articles = Articles(title, body)
     db.session.add(articles)
     db.session.commit()
-    
+
     return article_schema.jsonify(articles)
 
 
@@ -88,7 +90,7 @@ def delete_article(id):
     if article is not None:
         db.session.delete(article)
         db.session.commit()
-        
+
         return {
             'Status': f'article with id:{id} deleted successfully'
         }
