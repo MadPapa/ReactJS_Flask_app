@@ -1,10 +1,17 @@
 import React from "react";
 import { useState } from "react";
+import APIService from "./APIService";
 
 function Form(props) {
 
     const [title, setTitle] = useState(props.article.title)
     const [body, setBody] = useState(props.article.body)
+    const updateArticle = () => {
+        APIService.UpdateArticle(props.article.id, { title, body })
+            .then(resp => console.log(resp))
+            .catch(error => console.log(error))
+    }
+
 
     return (
         <div>
@@ -29,6 +36,10 @@ function Form(props) {
                         value={body}
                         onChange={(e) => setBody(e.target.value)}
                     />
+                    <button
+                        className="btn btn-success mt-3"
+                        onClick={updateArticle}
+                    >Update</button>
                 </div>
             ) : null}
         </div>
