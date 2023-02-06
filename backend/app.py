@@ -67,12 +67,11 @@ def add_article():
 def update_article(id):
     article = Articles.query.get(id)
     if article is not None:
-        title = request.json('title')
-        body = request.json('body')
+        title = request.json['title']
+        body = request.json['body']
 
         article.title = title
         article.body = body
-
         db.session.commit()
         return article_schema.jsonify(article)
     return {
