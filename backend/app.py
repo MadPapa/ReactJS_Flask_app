@@ -42,7 +42,9 @@ with app.app_context():
 # app views
 @app.route('/get', methods=['GET'])
 def get_articles():
-    return jsonify({"hello": "world"})
+    articles = Articles.query.all()
+    results = articles_schema.dump(articles)
+    return jsonify(results)
 
 
 @app.route('/add', methods=['POST'])
