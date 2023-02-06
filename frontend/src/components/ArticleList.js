@@ -9,6 +9,16 @@ function ArticleList(props) {
                         <h2>{article.title}</h2>
                         <p>{article.body}</p>
                         <p>{article.date}</p>
+                        
+                        <div className='row'>
+                            <div className='col-md-1'>
+                                <button className='btn btn-primary'>Update</button>
+                            </div>
+                        
+                            <div className='col'>
+                                <button className='btn btn-danger'>Delete</button>
+                            </div>
+                        </div>
                     </div>
                 )
             })}
