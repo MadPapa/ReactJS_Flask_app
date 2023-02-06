@@ -30,7 +30,9 @@ function App() {
       <h1>Flask and React App</h1>
 
       <ArticleList articles={articles} editArticle={editArticle} />
-      <Form article={editedArticle} />
+
+      {editedArticle ? <Form article={editedArticle} /> : null}
+      
     </div>
   );
 }
