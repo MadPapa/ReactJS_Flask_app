@@ -34,17 +34,22 @@ article_schema = ArticleSchema()
 articles_schema = ArticleSchema(many=True)
 
 
-# creating database command
-with app.app_context():
-    db.create_all()
-
-
 # app views
 @app.route('/get', methods=['GET'])
 def get_articles():
     articles = Articles.query.all()
     results = articles_schema.dump(articles)
     return jsonify(results)
+
+
+@app.route('/get/<int:id>', methods=['GET'])
+def article_detail(id):
+    article = Articles.query.get(id)
+    if article is not None:
+        return article_schema.jsonify(article)
+    return {
+        'Status': f'article with id:{id} not found'
+    }
 
 
 @app.route('/add', methods=['POST'])
@@ -58,5 +63,25 @@ def add_article():
     return article_schema.jsonify(articles)
 
 
+@app.route('/update/<int:id>', methods=['PUT'])
+def update_article(id):
+    article = Articles.query.get(id)
+    if article is not None:
+        title = request.json('title')
+        body = request.json('body')
+
+        article.title = title
+        article.body = body
+
+        db.session.commit()
+        return article_schema.jsonify(article)
+    return {
+        'Status': f'article with id:{id} not found'
+    }
+
+
 if __name__ == '__main__':
+    # creating database command
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
