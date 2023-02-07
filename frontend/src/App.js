@@ -34,9 +34,21 @@ function App() {
     setArticles(new_article)
   }
 
+  const openForm = () => {
+    setEditedArticle({ title: '', body: '' })
+  }
+
   return (
     <div className="App">
-      <h1>Flask and React App</h1>
+      <div className='row'>
+        <div className='col'>
+          <h1>Flask and React App</h1>
+
+        </div>
+        <div className='col'>
+          <button className='btn btn-success' onClick={openForm}>InsertArticle</button>
+        </div>
+      </div>
       <br />
       <br />
 

@@ -18,6 +18,11 @@ function Form(props) {
             .catch(error => console.log(error))
     }
 
+    const insertArticle = () => {
+        APIService.InsertArticle({ title, body })
+            .then(resp => console.log(resp))
+            .catch(error => console.log(error))
+    }
 
     return (
         <div>
@@ -42,10 +47,19 @@ function Form(props) {
                         value={body}
                         onChange={(e) => setBody(e.target.value)}
                     />
-                    <button
-                        className="btn btn-success mt-3"
-                        onClick={updateArticle}
-                    >Update</button>
+                    {
+                        props.article.id ?
+                            <button
+                                className="btn btn-success mt-3"
+                                onClick={updateArticle}
+                            >Update</button>
+                            :
+                            <button
+                                className="btn btn-success mt-3"
+                                onClick={insertArticle}
+                            >Insert</button>
+                    }
+
                 </div>
             ) : null}
         </div>
