@@ -38,6 +38,11 @@ function App() {
     setEditedArticle({ title: '', body: '' })
   }
 
+  const insertArticle = (article) => {
+    const new_article = [...articles, article]
+    setArticles(new_article)
+  }
+
   return (
     <div className="App">
       <div className='row'>
@@ -54,7 +59,7 @@ function App() {
 
       <ArticleList articles={articles} editArticle={editArticle} />
 
-      {editedArticle ? <Form article={editedArticle} updatedData={updatedData} /> : null}
+      {editedArticle ? <Form article={editedArticle} updatedData={updatedData} insertArticle={insertArticle} /> : null}
 
     </div>
   );

@@ -20,7 +20,7 @@ function Form(props) {
 
     const insertArticle = () => {
         APIService.InsertArticle({ title, body })
-            .then(resp => console.log(resp))
+            .then(resp => props.insertArticle(resp))
             .catch(error => console.log(error))
     }
 
